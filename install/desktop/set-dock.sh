@@ -4,7 +4,6 @@ apps=(
 	"Alacritty.desktop"
 	"Neovim.desktop"
 	"code.desktop"
-	"WhatsApp.desktop"
 	"steam.desktop"
 	"Docker.desktop"
 	"org.gnome.Settings.desktop"
