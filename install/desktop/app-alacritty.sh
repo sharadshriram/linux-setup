@@ -5,7 +5,7 @@ cp ~/.local/share/linux-setup/configs/alacritty.toml ~/.config/alacritty/alacrit
 cp ~/.local/share/linux-setup/configs/alacritty/shared.toml ~/.config/alacritty/shared.toml
 cp ~/.local/share/linux-setup/configs/alacritty/pane.toml ~/.config/alacritty/pane.toml
 cp ~/.local/share/linux-setup/configs/alacritty/btop.toml ~/.config/alacritty/btop.toml
-cp ~/.local/share/linux-setup/themes/tokyo-night/alacritty.toml ~/.config/alacritty/theme.toml
+cp ~/.local/share/linux-setup/themes/catppuccin/alacritty.toml ~/.config/alacritty/theme.toml
 cp ~/.local/share/linux-setup/configs/alacritty/fonts/CaskaydiaMono.toml ~/.config/alacritty/font.toml
 cp ~/.local/share/linux-setup/configs/alacritty/font-size.toml ~/.config/alacritty/font-size.toml
 

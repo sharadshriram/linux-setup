@@ -8,7 +8,6 @@ trap 'echo "linux-setup installation failed! You can retry by running: source ~/
 source ~/.local/share/linux-setup/install/check-version.sh
 
 # Ask for app choices
-echo "Get ready to make a few choices..."
 source ~/.local/share/linux-setup/install/terminal/required/app-gum.sh >/dev/null
 
 # Desktop software and tweaks will only be installed if we're running Gnome
