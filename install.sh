@@ -4,9 +4,6 @@ set -e
 # Give people a chance to retry running the installation
 trap 'echo "linux-setup installation failed! You can retry by running: source ~/.local/share/linux-setup/install.sh"' ERR
 
-# Check the distribution name and version and abort if incompatible
-source ~/.local/share/linux-setup/install/check-version.sh
-
 # Ask for app choices
 source ~/.local/share/linux-setup/install/terminal/required/app-gum.sh >/dev/null
 
