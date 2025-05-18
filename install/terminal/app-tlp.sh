@@ -1,2 +1,2 @@
-sudo apt -y install tlp tlp-rdw
+sudo apt install -y tlp tlp-rdw
 sudo tlp start

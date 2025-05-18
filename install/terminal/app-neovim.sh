@@ -21,7 +21,7 @@ if [ ! -d "$HOME/.config/nvim" ]; then
   mkdir -p ~/.config/nvim/plugin/after
   cp ~/.local/share/linux-setup/configs/neovim/transparency.lua ~/.config/nvim/plugin/after/
 
-  # Default to Tokyo Night theme
+  # Default to catppuccin theme
   cp ~/.local/share/linux-setup/themes/catppuccin/neovim.lua ~/.config/nvim/lua/plugins/theme.lua
 
   # Turn off animated scrolling

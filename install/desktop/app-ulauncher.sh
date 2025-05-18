@@ -1,7 +1,7 @@
 sudo add-apt-repository universe -y 
 sudo add-apt-repository ppa:agornostal/ulauncher -y 
 sudo apt update 
-sudo apt install ulauncher
+sudo apt install -y ulauncher
 
 # Start ulauncher to have it populate config before we overwrite
 mkdir -p ~/.config/autostart/
