@@ -1,3 +1,3 @@
 VSC_THEME="Catppuccin Macchiato"
 VSC_EXTENSION="Catppuccin.catppuccin-vsc"
-source $OMAKUB_PATH/themes/set-vscode-theme.sh
+source $SETUP_PATH/themes/set-vscode-theme.sh

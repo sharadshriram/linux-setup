@@ -1,3 +1,3 @@
-OMAKUB_THEME_COLOR="blue"
-OMAKUB_THEME_BACKGROUND="nord/background.png"
-source $OMAKUB_PATH/themes/set-gnome-theme.sh
+THEME_COLOR="blue"
+THEME_BACKGROUND="nord/background.png"
+source $SETUP_PATH/themes/set-gnome-theme.sh
