@@ -2,6 +2,16 @@
 force_color_prompt=yes
 color_prompt=yes
 
-# Simple prompt with path in the window/pane title and caret for typing line
-PS1=$'\uf0a9 '
-PS1="\[\e]0;\w\a\]$PS1"
+# Add Git branch name to prompt
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+# Add path to prompt
+function show_path() {
+    echo " "
+    echo $(pwd)
+}
+
+# Define PS1 (prompt string)
+PS1="\\[\\033[00;32m\\]\u@\h:\\[\\033[00;34m\\]\w\\[\\033[00m\\]$(parse_git_branch)\\[\\033[00m\\]\$ "
