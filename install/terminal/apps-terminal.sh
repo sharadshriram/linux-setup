@@ -1,1 +1,2 @@
-sudo apt install -y fzf ripgrep bat eza zoxide plocate btop apache2-utils fd-find tldr tmux
+sudo apt install -y fzf ripgrep eza zoxide plocate fd-find tldr tmux
+

@@ -6,15 +6,12 @@ echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=$(dpkg --pr
 sudo apt update
 sudo apt install -y mise
 
-
 # Python
 mise use --global python@latest
 
 # Go
 mise use --global go@latest
 
-# Node.js
-mise use --global node@lts
-
 # Rust
 bash -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" -- -y
+
