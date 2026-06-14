@@ -1,13 +1,15 @@
-# Exit immediately if a command exits with a non-zero status
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-sudo apt-get update >/dev/null
-sudo apt-get install -y git >/dev/null
+REPO_DIR="$HOME/.local/share/linux-setup"
 
-echo "Cloning Setup..."
-rm -rf ~/.local/share/linux-setup
-git clone https://github.com/sharadshriram/linux-setup.git ~/.local/share/linux-setup >/dev/null
+sudo apt-get update
+sudo apt-get install -y git
 
+if [[ -d "$REPO_DIR" ]]; then
+  git -C "$REPO_DIR" pull --ff-only
+else
+  git clone https://github.com/sharadshriram/linux-setup.git "$REPO_DIR"
+fi
 
-echo "Installation starting..."
-source ~/.local/share/linux-setup/install.sh
+bash "$REPO_DIR/install.sh"
