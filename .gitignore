@@ -1,0 +1,11 @@
+# Large binary zip archives
+JetBrainsMono.zip
+
+# System/Backup files
+*.bak
+*.bkp
+.DS_Store
+
+# Logs and temp files
+*.log
+tmp/

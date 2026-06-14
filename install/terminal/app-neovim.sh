@@ -10,8 +10,8 @@ cd -
 # Install luarocks and tree-sitter-cli to resolve lazyvim :checkhealth warnings
 sudo apt install -y luarocks tree-sitter-cli
 
-# Only attempt to set configuration if Neovim has never been run
-if [ ! -d "$HOME/.config/nvim" ]; then
+# Only attempt to set configuration if Neovim has never been run and no dotfiles exist
+if [ ! -d "$HOME/.config/nvim" ] && [ ! -d "$HOME/.local/share/linux-setup/dotfiles/nvim/.config/nvim" ]; then
   # Use LazyVim
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   # Remove the .git folder, so you can add it to your own repo later

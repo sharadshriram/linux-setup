@@ -11,3 +11,12 @@ sudo apt update -y
 sudo apt install -y code
 
 mkdir -p ~/.config/Code/User
+
+# Install core development extensions
+if command -v code &> /dev/null; then
+  echo "Installing core VS Code extensions..."
+  code --install-extension ms-python.python --force
+  code --install-extension ms-python.vscode-pylance --force
+  code --install-extension charliermarsh.ruff --force
+  code --install-extension christian-kohnen.tmux-navigator --force
+fi

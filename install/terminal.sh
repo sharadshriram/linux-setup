@@ -1,7 +1,7 @@
 # Needed for all installers
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install -y curl git unzip
+sudo apt install -y curl git unzip build-essential python3-dev libssl-dev libffi-dev
 
 # Run terminal installers
 for installer in ~/.local/share/linux-setup/install/terminal/*.sh; do source $installer; done
