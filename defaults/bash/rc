@@ -1,5 +1,0 @@
-source ~/.local/share/linux-setup/defaults/bash/shell
-source ~/.local/share/linux-setup/defaults/bash/aliases
-source ~/.local/share/linux-setup/defaults/bash/functions
-source ~/.local/share/linux-setup/defaults/bash/prompt
-source ~/.local/share/linux-setup/defaults/bash/init
