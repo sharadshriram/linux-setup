@@ -1,4 +1,0 @@
-[submodule "pop_shell"]
-	path = pop_shell
-	url = https://github.com/pop-os/shell.git
-	branch = master_noble
