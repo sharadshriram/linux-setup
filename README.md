@@ -1,93 +1,112 @@
-# My Linux Setup (Ubuntu-based Gnome)
+# linux-setup
 
-A minimal, automated Linux setup and configuration repository inspired by [Omakub](https://github.com/basecamp/omakub), designed to keep environment settings synchronized across multiple machines.
+A minimal, idempotent setup for a Python / ML / agentic-systems dev
+environment on any Debian-based Linux machine.
 
-It uses **GNU Stow** to manage configuration files (dotfiles) as symlinks from the home directory to the cloned repository.
+Four scripts, each with one job:
 
----
+| Script | Responsibility |
+|---|---|
+| `install.sh` | Installs all packages, runtimes, and applications. The single entrypoint — calls the other three at the end. |
+| `configs.sh` | Symlinks dotfiles from `dotfiles/` into your home directory (plain `ln -s`, no GNU Stow). |
+| `terminal.sh` | Sets up the interactive shell: zsh plugins, the `starship` prompt, tmux plugin manager. |
+| `theme.sh` | Applies one consistent color theme (Catppuccin Mocha) across terminal, GTK/GNOME, VS Code, and Neovim. |
 
-## 🚀 Setup a Fresh Ubuntu Install
-
-If you are on an old Ubuntu version, consider upgrading to the current LTS release (24.04+):
-
-```bash
-sudo apt update
-sudo apt upgrade
-sudo apt dist-upgrade
-sudo apt install update-manager-core
-sudo reboot
-```
-
-Once the updates are done and reboot is complete, start the distribution upgrade (this will be a time-consuming step):
+## Quick start
 
 ```bash
-sudo do-release-upgrade
+git clone https://github.com/sharadshriram/linux-setup.git ~/.local/share/linux-setup
+cd ~/.local/share/linux-setup
+bash install.sh
 ```
 
----
-
-## 🛠️ Installation
-
-You can bootstrap this setup on a fresh machine by running the following command:
+`install.sh` installs everything, then automatically runs `configs.sh` and
+`terminal.sh` for you. Run `theme.sh` separately whenever you want to
+(re)apply the color theme — it's independent on purpose, so you can restyle
+without reinstalling anything.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sharadshriram/linux-setup/main/boot.sh | bash
+bash theme.sh
 ```
 
-This will:
-1. Clone this repository to `~/.local/share/linux-setup`.
-2. Install all terminal packages, runtimes (via `mise`), and desktop applications.
-3. Automatically link all configuration files from the `dotfiles/` folder to your home directory using GNU Stow.
+Every script is **idempotent** — re-run any of them any time. They check
+before installing or linking, so nothing is duplicated or clobbered.
+Existing real config files are backed up to `<file>.bak` before being
+replaced with a symlink.
 
----
+## What gets installed
 
-## 📦 How the Dotfiles Sync Works (GNU Stow)
+- **Shell:** zsh (default) + bash, with `starship` prompt, autosuggestions,
+  syntax highlighting, fzf
+- **Terminal:** Kitty
+- **Editors:** Neovim (latest stable), VS Code
+- **Python / ML:** `mise` (runtime manager), `uv`, `ruff`, `pyright`,
+  JupyterLab
+- **Agentic tooling:** Claude Code CLI
+- **Browsers:** Google Chrome, Firefox
+- **Reference / notes:** Zotero, Obsidian
+- **Fonts:** JetBrainsMono Nerd Font
 
-All configuration files are organized in the `dotfiles/` directory by application package (e.g. `bash`, `zsh`, `tmux`, `vscode`, `nvim`, `xcompose`).
+## How dotfiles work
 
-Stow creates symlinks in your home directory pointing to the files in the repository:
-- `~/.bashrc` ➔ `~/.local/share/linux-setup/dotfiles/bash/.bashrc`
-- `~/.zshrc` ➔ `~/.local/share/linux-setup/dotfiles/zsh/.zshrc`
-- `~/.config/tmux/tmux.conf` ➔ `~/.local/share/linux-setup/dotfiles/tmux/.config/tmux/tmux.conf`
-- `~/.config/Code/User/settings.json` ➔ `~/.local/share/linux-setup/dotfiles/vscode/.config/Code/User/settings.json`
-- `~/.config/nvim/` ➔ `~/.local/share/linux-setup/dotfiles/nvim/.config/nvim/`
+`dotfiles/` mirrors your home directory structure. `configs.sh` symlinks
+each file/directory into place:
 
-### 🔄 Syncing Changes Across Machines
+```
+dotfiles/zsh/.zshrc          -> ~/.zshrc
+dotfiles/bash/.bashrc        -> ~/.bashrc
+dotfiles/tmux/tmux.conf      -> ~/.config/tmux/tmux.conf
+dotfiles/kitty/kitty.conf    -> ~/.config/kitty/kitty.conf
+dotfiles/nvim/               -> ~/.config/nvim/   (whole directory)
+dotfiles/vscode/settings.json -> ~/.config/Code/User/settings.json
+dotfiles/git/.gitconfig      -> ~/.gitconfig
+```
 
-#### 1. Making changes on Machine A
-Since your home directory configurations are symlinks directly pointing to the git repository:
-1. Simply edit your configuration file (e.g., your `.zshrc` or Neovim settings in `~/.config/nvim`).
-2. Go to the repository directory:
-   ```bash
-   cd ~/.local/share/linux-setup
-   ```
-3. Commit and push your changes to GitHub:
-   ```bash
-   git add dotfiles/
-   git commit -m "Update shell/nvim configurations"
-   git push origin main
-   ```
+Because these are symlinks, editing `~/.zshrc` directly edits the file in
+the repo. To sync changes to another machine:
 
-#### 2. Pulling changes on Machine B
-On your other machine:
-1. Pull the updates from GitHub:
-   ```bash
-   cd ~/.local/share/linux-setup
-   git pull origin main
-   ```
-2. Re-apply the symlinks (if new files were added) by running:
-   ```bash
-   bash ~/.local/share/linux-setup/install/terminal/stow.sh
-   ```
+```bash
+cd ~/.local/share/linux-setup
+git add dotfiles/ && git commit -m "update zshrc" && git push
 
----
+# on the other machine
+cd ~/.local/share/linux-setup
+git pull
+bash configs.sh   # only needed if new files were added
+```
 
-## 📁 Repository Structure
+## Theming
 
-- `dotfiles/` - Configuration files managed by GNU Stow.
-- `install/` - Shell scripts to install terminal and desktop software.
-- `defaults/` - Base settings and modular shell imports (aliases, path additions, etc.).
-- `themes/` - Color schemes and desktop background customizations.
-- `uninstall/` - Uninstallation scripts for individual applications.
+`theme.sh` is separate from `install.sh` so you can change your color
+scheme without touching packages. It:
 
+- Writes `~/.config/kitty/theme.conf` with the Catppuccin Mocha palette and
+  live-reloads it via `kitten @ set-colors` if Kitty is running
+- Sets GTK to dark mode (skipped gracefully on non-GNOME or headless systems)
+- Patches `~/.config/Code/User/settings.json` to use the Catppuccin VS Code
+  theme and installs the extension
+- Writes `dotfiles/nvim/lua/theme/init.lua`, a lazy.nvim module that sets
+  the Neovim colorscheme
+- Writes `dotfiles/zsh/theme.zsh` with a matching `fzf` color palette
 
+To change the theme, edit `THEME_NAME` and the color values at the top of
+`theme.sh`.
+
+## Repository structure
+
+```
+linux-setup/
+├── install.sh           # Single entrypoint: packages + runtimes + apps
+├── configs.sh            # Symlinks dotfiles into $HOME
+├── terminal.sh            # zsh plugins, starship, tmux plugin manager
+├── theme.sh                # Color theme across terminal/VS Code/Neovim/GTK
+├── dotfiles/
+│   ├── zsh/.zshrc
+│   ├── bash/.bashrc
+│   ├── tmux/tmux.conf
+│   ├── kitty/{kitty.conf, theme.conf}
+│   ├── nvim/init.lua
+│   ├── vscode/{settings.json, keybindings.json}
+│   └── git/.gitconfig
+└── README.md
+```
