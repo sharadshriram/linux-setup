@@ -1,0 +1,13 @@
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    lg = log --oneline --graph --decorate
+[pull]
+    rebase = true
+[init]
+    defaultBranch = main
+[core]
+    editor = nvim
+    pager = bat --paging=always

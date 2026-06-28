@@ -1,0 +1,55 @@
+{
+  "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'monospace'",
+  "editor.fontSize": 13,
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80],
+  "editor.occurrencesHighlight": "off",
+  "editor.selectionHighlight": false,
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono'",
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "window.titleBarStyle": "custom",
+  "window.menuBarVisibility": "compact",
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
+  "git.ignoreMissingGitWarning": true,
+  "extensions.ignoreRecommendations": true,
+  "explorer.confirmDelete": false,
+  "security.workspace.trust.untrustedFiles": "open",
+
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  }
+}
