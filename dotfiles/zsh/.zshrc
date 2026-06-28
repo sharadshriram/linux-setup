@@ -59,3 +59,4 @@ have fzf     && source <(fzf --zsh) 2>/dev/null || true
 have mise    && eval "$(mise activate zsh)"
 have zoxide  && eval "$(zoxide init zsh --cmd cd)"
 have starship && eval "$(starship init zsh)"
+. "$HOME/.local/bin/env"

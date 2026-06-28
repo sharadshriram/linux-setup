@@ -48,3 +48,4 @@ if command -v starship &>/dev/null; then
 else
   PS1='\[\033[00;32m\]\u@\h:\[\033[00;34m\]\w\[\033[00m\]$(git branch 2>/dev/null | sed -n "s/* \(.*\)/ (\1)/p")\$ '
 fi
+. "$HOME/.local/bin/env"
