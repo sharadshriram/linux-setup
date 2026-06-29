@@ -5,6 +5,7 @@ JetBrainsMono.zip
 *.bak
 *.bkp
 .DS_Store
+dotfiles/git/.gitconfig
 
 # Logs and temp files
 *.log
